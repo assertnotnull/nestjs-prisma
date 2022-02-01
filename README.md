@@ -49,6 +49,9 @@ docker-compse up -d
 # generate prisma types from the schema.prisma
 pnpm run prisma generate
 
+# apply the changes from the schema.prisma to the database (dev)
+pnpm run db push
+
 # seed some users from the prisma/seed.ts file
 pnpm run db seed
 ```
@@ -79,6 +82,13 @@ $ pnpm run test:e2e
 
 # test coverage
 $ pnpm run test:cov
+```
+
+## Migration
+
+```bash
+# the following will create a migration file for changes in the schema.prisma
+$ pnpm run prisma migrate dev
 ```
 
 ## Support
