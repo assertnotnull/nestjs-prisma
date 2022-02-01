@@ -44,16 +44,16 @@ DATABASE_URL=postgresql://postgres:postgres@localhost:5432/sample_dev?schema=pub
 
 ```bash
 # start database
-docker-compse up -d
+$ docker-compose up -d
 
 # generate prisma types from the schema.prisma
-pnpm run prisma generate
+$ pnpm run prisma generate
 
 # apply the changes from the schema.prisma to the database (dev)
-pnpm run db push
+$ pnpm run prisma db push
 
 # seed some users from the prisma/seed.ts file
-pnpm run db seed
+$ pnpm run prisma db seed
 ```
 
 ## Running the app
