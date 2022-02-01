@@ -29,33 +29,56 @@
 ## Installation
 
 ```bash
-$ npm install
+$ pnpm install
+```
+
+## Setup
+
+This repo comes with [Prisma](https://www.prisma.io/) as the ORM layer and a database in Docker compose.
+
+Create a `.env` file at the root of the project with:
+
+```
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/sample_dev?schema=public
+```
+
+```bash
+# start database
+docker-compse up -d
+
+# generate prisma types from the schema.prisma
+pnpm run prisma generate
+
+# seed some users from the prisma/seed.ts file
+pnpm run db seed
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ pnpm run start
 
 # watch mode
-$ npm run start:dev
+$ pnpm run start:dev
 
 # production mode
-$ npm run start:prod
+$ pnpm run start:prod
 ```
+
+Now you can visit http://localhost:3000/users
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ pnpm run test
 
 # e2e tests
-$ npm run test:e2e
+$ pnpm run test:e2e
 
 # test coverage
-$ npm run test:cov
+$ pnpm run test:cov
 ```
 
 ## Support
