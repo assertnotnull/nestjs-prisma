@@ -30,9 +30,9 @@ const responseCodec = Codec.interface({
 
 type Response = GetType<typeof responseCodec>
 
-function toJSON(data) {
+function processingText(data) {
   try {
-    return JSON.parse(data)
+    return JSON.parse(data + '-')
   } catch (err) {
     Logger.error(err)
   }
@@ -45,20 +45,12 @@ export class IMDBService extends RapidAPI {
   }
 
   async getTitle(query: string) {
-    try {
-      const response = await this.httpGet('title/find').query({ q: query })
-      const jsonData: Response = toJSON(response.text)
-      const results: Title[] = jsonData.results
-      Logger.debug(results)
-      results.forEach(({ id }) => Logger.debug(id))
-      return map(prop('id'), results)
-    } catch (err) {
-      throw new Error(
-        err.message,
-        // @ts-ignore
-        { cause: err },
-      )
-    }
+    // const response = await this.httpGet('title/find').query({ q: query })
+    // const jsonData: Response = processingText(response.text)
+    // const results: Title[] = jsonData.results
+    // Logger.debug(results)
+    // results.forEach(({ id }) => Logger.debug(id))
+    // return map(prop('id'), results)
 
     const out = await this.eitherRequest(
       this.httpGet('title/find').query({ q: query }),
@@ -70,6 +62,7 @@ export class IMDBService extends RapidAPI {
       })
       .map((response) => {
         // response.results.forEach(({ id }) => Logger.debug(id))
+        return response
         return response.results.map(({ year }) => `it's the year ${year}`)
       })
 

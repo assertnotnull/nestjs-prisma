@@ -13,7 +13,7 @@ type User = {
   }
 }
 
-var user = {
+const user = {
   email: 'james@example.com',
   accountDetails: {
     address: {
@@ -26,7 +26,7 @@ var user = {
   preferences: {},
 }
 
-var user2 = {
+const user2 = {
   email: 'james@example.com',
   accountDetails: {
     address: {
@@ -68,4 +68,5 @@ function getUserBanner(banners: Record<string, string>, user: User) {
     .chain(getProvinceBanner(banners))
 }
 
+console.log(getUserBanner(banners, user2).orDefault('/default'))
 console.log(getUserBanner(banners, user).orDefault('/default'))
